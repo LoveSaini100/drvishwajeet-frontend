@@ -1,7 +1,18 @@
 const formatApiBase = () => {
-  let base = (import.meta.env.VITE_API_BASE_URL || '/api').trim();
+  let base = (import.meta.env.VITE_API_BASE_URL || '').trim();
+
+  // If running in production on live domain and no env is provided, default to the live Vercel backend
+  if (!base) {
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      base = 'https://drvishwajeet-backend.vercel.app/api';
+    } else {
+      base = '/api';
+    }
+  }
+
   // Strip trailing slashes
   base = base.replace(/\/+$/, '');
+
   // If base is a full URL but missing /api at the end, append it automatically
   if (base.startsWith('http') && !base.endsWith('/api')) {
     base = `${base}/api`;
