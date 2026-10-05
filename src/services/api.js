@@ -24,7 +24,7 @@ const safeFetchJson = async (url, options = {}) => {
         data = JSON.parse(text);
       } catch {
         if (res.status === 500 || res.status === 503 || res.status === 502) {
-          data = { message: 'Backend server is not running on port 5000. Please start the backend server (`cd backend && npm start` or `npm start` from root).' };
+          data = { message: 'Server error. Please verify backend service and database connection.' };
         } else {
           data = { message: text || `Server error (${res.status})` };
         }
@@ -37,7 +37,7 @@ const safeFetchJson = async (url, options = {}) => {
     return data;
   } catch (err) {
     if (err.message?.includes('Failed to fetch') || err.message?.includes('NetworkError') || err.message?.includes('Load failed')) {
-      throw new Error('Backend server is offline. Please start the backend server on port 5000 (`cd backend && npm start` or `npm start` from root).');
+      throw new Error('Could not connect to backend server. Please check backend deployment status.');
     }
     throw err;
   }
