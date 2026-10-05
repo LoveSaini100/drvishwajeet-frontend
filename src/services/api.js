@@ -1,4 +1,15 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
+const formatApiBase = () => {
+  let base = (import.meta.env.VITE_API_BASE_URL || '/api').trim();
+  // Strip trailing slashes
+  base = base.replace(/\/+$/, '');
+  // If base is a full URL but missing /api at the end, append it automatically
+  if (base.startsWith('http') && !base.endsWith('/api')) {
+    base = `${base}/api`;
+  }
+  return base;
+};
+
+const API_BASE = formatApiBase();
 
 const safeFetchJson = async (url, options = {}) => {
   try {
