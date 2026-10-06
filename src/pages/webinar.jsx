@@ -242,7 +242,7 @@ ${formData.message || 'None provided'}
                       Free Application & Registration
                     </span>
                     <h2 className="text-base sm:text-xl font-extrabold text-white">
-                      Apply for Webinar & Mentorship
+                      Connect with Dr. Vishwajeet (IIT Roorkee)
                     </h2>
                   </div>
                   <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-brand-300">
